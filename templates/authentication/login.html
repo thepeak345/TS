@@ -1,0 +1,13 @@
+{% extends 'main/home.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button><i></i>Login</button>
+    </form>
+{% endblock %}
