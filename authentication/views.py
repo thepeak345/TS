@@ -12,6 +12,9 @@ def signup(request):
     form = SignUpForm(request.POST or None)
     error = ''
     if request.method == 'POST':
+
+        print(form.as_p())
+
         if form.is_valid():
             cd = form.cleaned_data
             user = User.objects.create_user(
@@ -20,7 +23,6 @@ def signup(request):
                 email=cd['email'],
                 password=cd['password']
             )
-
             otp = generate_otp()
             user.otp = otp
             print(otp)
@@ -63,7 +65,6 @@ def login_view(request):
             if user is not None:
                 login(request, user)
                 return redirect('success')
-            error += 'Username or password are incorrect'
     return render(request, 'authentication/login.html', context={
         'form': form,
         'error': error
