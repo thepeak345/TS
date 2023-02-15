@@ -1,0 +1,62 @@
+{% extends 'main/home.html' %}
+
+{% block title %}SignUp{% endblock %}
+
+
+{% block content %}
+
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+        <p>{{ field.label }}</p>
+        {{ field }}<br>
+        {% endfor %}
+
+
+        <button><i></i>SignUp</button>
+        </li>
+    </form>
+
+
+{% endblock %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2>Sign up</h2>
+        <h3>Who you are?</h3>
+        <div class="person">
+            <div class="icons">
+                <img src="./img/parent.jpg" alt="#">
+                <p>PARENT</p>
+            </div>
+            <div class="icons">
+                <img src="./img/child.jpg" alt="#">
+                <p>CHILD</p>
+            </div>
+            <div class="icons">
+                <img src="./img/teacher.jpg" alt="#">
+                <p>TEACHER</p>
+            </div>
+        </div>
+        <form action=""  method="get" >
+            <input type="text" id="mail" placeholder="Email">
+            <input type="text" placeholder="Firstname">
+            <input type="text" placeholder="Lastname">
+            <input type="password" id="password" placeholder="Password">
+            <input type="password" id="password" placeholder="Confirm Password">
+            <button type="submit"> SignUp</button>
+        </form>
+    </div>
+</body>
+</html>
