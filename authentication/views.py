@@ -2,8 +2,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.contrib.auth import logout, authenticate, login
-from .forms import SignUpForm, LoginForm, OtpForm
+from .forms import SignUpForm, LoginForm, OtpForm, PasswordResetForm
 from .utils import generate_otp
+from .models import PasswordReset
+from django.views import generic
+
 
 User = get_user_model()
 
@@ -75,3 +78,13 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('index')
+
+
+class PasswordResetDoneView(generic.TemplateView):
+    template_name = 'authentication/password_reset_done.html'
+    title = "Password reset sent"
+
+class PasswordResetView(generic.TemplateView):
+    model = PasswordReset
+    template_name = 'authentication/password_reset.html'
+    form_class = PasswordResetForm

@@ -1,4 +1,5 @@
 from django import forms
+from.models import PasswordReset
 
 
 class SignUpForm(forms.Form):
@@ -22,3 +23,9 @@ class LoginForm(forms.Form):
 
 class OtpForm(forms.Form):
     otp = forms.IntegerField()
+
+class PasswordResetForm(forms.Form):
+    class Meta:
+        model = PasswordReset
+        fields = ('new_password')
+

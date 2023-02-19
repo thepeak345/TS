@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from .managers import MyUserManager
+from django import forms
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
@@ -20,3 +21,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
+
+
+class PasswordReset(models.Model):
+    new_password = models.CharField(widget=forms.PasswordInput)
+
