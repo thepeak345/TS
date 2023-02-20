@@ -24,5 +24,5 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
 
 class PasswordReset(models.Model):
-    new_password = models.CharField(widget=forms.PasswordInput)
+    new_password = models.CharField(max_length=255)
 

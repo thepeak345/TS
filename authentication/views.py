@@ -4,9 +4,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth import logout, authenticate, login
 from .forms import SignUpForm, LoginForm, OtpForm, PasswordResetForm
 from .utils import generate_otp
-from .models import PasswordReset
 from django.views import generic
-
 
 User = get_user_model()
 
@@ -52,7 +50,7 @@ def user_confirm(request):
                 user.is_active = True
                 user.save()
                 del request.session['email']
-            return redirect()
+            return redirect('home')
     return render(request, template_name='authentication/otp.html', context={
         'form': form,
     })
@@ -84,7 +82,8 @@ class PasswordResetDoneView(generic.TemplateView):
     template_name = 'authentication/password_reset_done.html'
     title = "Password reset sent"
 
-class PasswordResetView(generic.TemplateView):
-    model = PasswordReset
+
+class PasswordResetView(generic.FormView):
+    model = User
     template_name = 'authentication/password_reset.html'
     form_class = PasswordResetForm

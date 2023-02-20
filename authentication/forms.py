@@ -1,5 +1,8 @@
 from django import forms
-from.models import PasswordReset
+from django.contrib.auth import get_user_model
+from .models import PasswordReset
+
+User = get_user_model()
 
 
 class SignUpForm(forms.Form):
@@ -20,12 +23,26 @@ class LoginForm(forms.Form):
     lastname = forms.CharField(max_length=255)
     password = forms.CharField(widget=forms.PasswordInput)
 
+    def __init__(self, *args, **kwargs):
+        super(LoginForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
+            visible.field.widget.attrs['placeholder'] = visible.name
+
 
 class OtpForm(forms.Form):
     otp = forms.IntegerField()
 
-class PasswordResetForm(forms.Form):
-    class Meta:
-        model = PasswordReset
-        fields = ('new_password')
 
+class PasswordResetForm(forms.Form):
+    new_password = forms.CharField(widget=forms.PasswordInput)
+
+    class Meta:
+        model = User
+        fields = ('new_password',)
+
+    def __init__(self, *args, **kwargs):
+        super(PasswordResetForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
+            visible.field.widget.attrs['placeholder'] = visible.name

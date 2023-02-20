@@ -1,17 +1,8 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{% static 'css/stylesignup.css' %} ">
-</head>
-<body>
+{% extends 'layout.html' %}
 
-    <div class="container">
-        <h2>Sign up</h2>
+
+{% block content %}
+      <h2>Sign up</h2>
         <h3>Who you are?</h3>
         <form action=""  method="post" >
             {% for field in form %}
@@ -22,8 +13,6 @@
 <!--            <input type="text" placeholder="Lastname">-->
 <!--            <input type="password" id="password" placeholder="Password">-->
 <!--            <input type="password" id="password" placeholder="Confirm Password">-->
-            <button type="submit"> SignUp</button>
+            <a href="{% url 'home' %}"><button type="submit"> SignUp</button></a>
         </form>
-    </div>
-</body>
-</html>
+{% endblock %}
