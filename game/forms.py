@@ -8,7 +8,3 @@ class BoxForm(forms.ModelForm):
     class Meta:
         model = Box
         fields = ('is_closed', 'size')
-
-
-    def is_valid(self):
-        pass
