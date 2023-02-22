@@ -1,12 +1,15 @@
 {% extends 'layout.html' %}
 
 
-{% block title %}{% endblock %}
+{% block title %} {% endblock %}
 
 {% block content %}
+<h3>Вам на email пришёл одноразовый пароль</h3>
 <div class="features">
     <form method="post">
-        {{ form }}
+        {% for field in form %}
+                {{ field }}
+            {% endfor %}
     <button class="btn btn-success" type="submit">Ввести</button>
     </form>
 </div>

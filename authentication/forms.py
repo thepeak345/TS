@@ -33,6 +33,12 @@ class LoginForm(forms.Form):
 class OtpForm(forms.Form):
     otp = forms.IntegerField()
 
+    def __init__(self, *args, **kwargs):
+        super(OtpForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
+            visible.field.widget.attrs['placeholder'] = visible.name
+
 
 class PasswordResetForm(forms.Form):
     new_password = forms.CharField(widget=forms.PasswordInput)

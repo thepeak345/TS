@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from .managers import MyUserManager
 from django import forms
+from game.models import Box
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
@@ -12,6 +13,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     preferences = models.TextField(null=True)
     otp = models.SmallIntegerField(null=True)
+    box = models.OneToOneField(Box, on_delete=models.SET_NULL, null=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
