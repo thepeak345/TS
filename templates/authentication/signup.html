@@ -2,12 +2,12 @@
 
 
 {% block content %}
-      <h2>Sign up</h2>
-        <h3>Who you are?</h3>
+      <h2>Регистрация</h2>
+        <h3>Кто вы?</h3>
         <form action=""  method="post" >
             {% for field in form %}
                 {{ field }}
             {% endfor %}
-            <a href="{% url 'home' %}"><button type="submit"> SignUp</button></a>
+            <a href="{% url 'home' %}"><button type="submit"> Зарегестрироваться</button></a>
         </form>
 {% endblock %}

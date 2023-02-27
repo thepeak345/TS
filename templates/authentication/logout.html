@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+
+{% block content %}
+      <h2>Выход</h2>
+        <h3>Вы действительно хотите выйти из аккаунта?</h3>
+        <form action=""  method="post" >
+            {% for field in form %}
+                {{ field }}
+            {% endfor %}
+
+             <a href="{% url 'home' %}"><button type="submit">Выйти</button></a>
+
+        </form>
+
+{% endblock %}
