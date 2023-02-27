@@ -13,7 +13,7 @@
 
 }
 body{
-    background-color: rgb(55, 55, 101);
+    background-color: rgb(255, 182, 193);
 }
 h2{
     color: azure;
@@ -67,7 +67,7 @@ form input{
 }
 button{
     padding: 15px;
-    background:linear-gradient( rgb(36, 4, 76), rgb(66, 45, 106),rgb(36, 4, 76)) ;
+    background:linear-gradient( rgb(240, 128, 128), rgb(201, 201, 201),rgb(240, 128, 128)) ;
     margin: 30px 0px;
     border: 2px rgb(17, 11, 43) solid;
     border-radius: 25px;
@@ -86,3 +86,49 @@ button{
     font-size: 16px;
     font-weight: 500;
 }
+
+#leftcol { /* Левая колонка */
+    float: left; /* Обтекание справа */
+    width: 200px; /* Ширина колонки */
+}
+#rightcol { /* Правая колонка */
+    margin-left: 220px; /* Отступ слева */
+}
+#header {
+    font-size: 2.2em; /* Размер текста */
+    text-align: center; /* Выравнивание по центру */
+    padding: 5px; /* Отступы вокруг текста */
+    background: #8fa09b; /* Цвет фона шапки */
+    color: #ffe; /* Цвет текста */
+   }
+
+#sidebar {
+    margin-top: 10px;
+    width: 200px; /* Ширина слоя */
+    padding: 0 10px; /* Отступы вокруг текста */
+    float: left: 1000px /* Обтекание по правому краю */
+    background-color: rgb(0, 0, 0);
+    }
+
+#content {
+    margin-left: 130px; /* Отступ слева */
+    padding: 10px; /* Поля вокруг текста */
+    background: #fff; /* Цвет фона правой колонки */
+   }
+
+#footer {
+    background: #8fa09b; /* Цвет фона подвала */
+    color: #fff; /* Цвет текста */
+    padding: 5px; /* Отступы вокруг текста */
+    clear: left; /* Отменяем действие float */
+    }
+.huy {
+    margin: 0 auto;
+    max-width: 1000px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+

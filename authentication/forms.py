@@ -19,8 +19,7 @@ class SignUpForm(forms.Form):
 
 
 class LoginForm(forms.Form):
-    firstname = forms.CharField(max_length=255)
-    lastname = forms.CharField(max_length=255)
+    email = forms.EmailField()
     password = forms.CharField(widget=forms.PasswordInput)
 
     def __init__(self, *args, **kwargs):

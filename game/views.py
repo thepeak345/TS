@@ -3,7 +3,8 @@ from django.urls import reverse
 
 from .forms import BoxForm
 from .models import Box
-from authentication.utils import generate_string
+from authentication.utils import generate_otp
+
 
 def create_box(request):
     form = BoxForm(request.POST or None)
@@ -16,10 +17,9 @@ def create_box(request):
                 is_owner=True
             )
             if cd['is_closed']:
-                reverse(generate_string)
-                # Пусть будет редирект,
-                # где нужно будет генерировать кодовое слово
-                pass
+                otp = generate_otp(10)
+                box.code = otp
+                box.save()
 
     context = {
         'form': form,

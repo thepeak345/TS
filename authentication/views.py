@@ -24,7 +24,7 @@ def signup(request):
                 lastname=cd['lastname'],
                 password=cd['password']
             )
-            otp = generate_otp()
+            otp = generate_otp(5)
             user.otp = otp
             print(otp)
             user.save()
@@ -62,10 +62,10 @@ def login_view(request):
     if request.method == 'POST':
         if form.is_valid():
             cd = form.cleaned_data
-            user = authenticate(firstname=cd['firstname'], lastname=cd['lastname'], password=cd['password'])
-            if user is not None:
+            user = authenticate(email=cd['email'], password=cd['password'])
+            if user is not None and user.is_active:
                 login(request, user)
-                return redirect('success')
+                return redirect('home')
     return render(request, 'authentication/login.html', context={
         'form': form,
         'error': error

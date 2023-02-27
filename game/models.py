@@ -6,7 +6,7 @@ class Box(models.Model):
     is_closed = models.BooleanField(default=False)
     start_date = models.DateField(null=True)
     end_date = models.DateField(null=True)
-    code = models.CharField(max_length=20)
+    code = models.SmallIntegerField()
     member = models.ForeignKey(
         'authentication.CustomUser',
         on_delete=models.CASCADE,
