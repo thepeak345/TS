@@ -19,9 +19,9 @@ def signup(request):
         if form.is_valid():
             cd = form.cleaned_data
             user = User.objects.create_user(
+                email=cd['email'],
                 firstname=cd['firstname'],
                 lastname=cd['lastname'],
-                email=cd['email'],
                 password=cd['password']
             )
             otp = generate_otp()
