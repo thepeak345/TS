@@ -3,6 +3,7 @@
 {% block content %}
 <form action="" method="post">
     {{ form.as_p }}
-    <button type="submit"></button>
+    <a href="{% url 'otp' %}"><button type="submit"></button></a>
 </form>
 {% endblock %}
+
