@@ -8,21 +8,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/stylesignup.css' %} ">
-
 </head>
-
 <body>
   <div id="container">
+      {% block content %}
    <header><h1>Тайный Санта</h1></header>
       <sidebar>
-    <p><a href="{% url 'signup' %}">Регистрация</a></p>
-    <p><a href="{% url 'login' %}">Вход</a></p>
-    <p><a href="{% url 'logout' %}">Выход</a></p>
+          <p><a href="{% url 'signup' %}">Регистрация</a></p>
+        <p><a href="{% url 'login' %}">Вход</a></p>
+        <p><a href="{% url 'logout' %}">Выход</a></p>
       </sidebar>
       <article>
           <h2>Опрос общественного мнения показал</h2>
           </article>
       <footer>&copy; TS</footer>
+      {% endblock %}
   </div>
 </body>
 </html>
