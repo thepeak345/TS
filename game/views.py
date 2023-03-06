@@ -5,7 +5,10 @@ from .forms import BoxForm
 from .models import Box
 from authentication.utils import generate_otp
 
+from django.contrib.auth.decorators import login_required
 
+
+@login_required
 def create_box(request):
     form = BoxForm(request.POST or None)
     if request.method == 'POST':
