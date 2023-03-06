@@ -2,23 +2,27 @@
 <!DOCTYPE html>
 <html>
 <header lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/stylesignup.css' %} ">
-</head>
-<body>
-  <div id="container">
-      {% block content %}
-   <header><h1>Тайный Санта</h1></header>
-      <sidebar>
-          <p><a href="{% url 'signup' %}">Регистрация</a></p>
-        <p><a href="{% url 'login' %}">Вход</a></p>
-        <p><a href="{% url 'logout' %}">Выход</a></p>
-      </sidebar>
-      {% endblock %}
-  </div>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="{% static 'css/stylesignup.css' %} ">
+    </head>
+    <body>
+    <div id="container">
+        {% block content %}
+        <header><h1>Тайный Санта</h1></header>
+        <aside>
+            {% if request.user.is_authenticated %}
+            <p><a href="{% url 'logout' %}">Выход</a></p>
+            <p><a href="{% url 'check' %}">Создать игру</a></p>
+            {% else %}
+            <p><a href="{% url 'signup' %}">Регистрация</a></p>
+            <p><a href="{% url 'login' %}">Вход</a></p>
+            {% endif %}
+        </aside>
+        {% endblock %}
+    </div>
+    </body>
 </html>

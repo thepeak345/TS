@@ -1,9 +1,13 @@
 {% extends 'layout.html' %}
 
 {% block content %}
+{% if message %}
+    {{ message }}
+{% else %}
 <form action="" method="post">
     {{ form.as_p }}
     <a href="{% url 'otp' %}"><button type="submit"></button></a>
 </form>
+{% endif %}
 {% endblock %}
 

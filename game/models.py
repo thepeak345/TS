@@ -3,10 +3,11 @@ from .validators import validate_box_size
 
 
 class Box(models.Model):
+    title = models.CharField(max_length=255)
     is_closed = models.BooleanField(default=False)
     start_date = models.DateField(null=True)
     end_date = models.DateField(null=True)
-    code = models.SmallIntegerField()
+    code = models.SmallIntegerField(null=True)
     member = models.ForeignKey(
         'authentication.CustomUser',
         on_delete=models.CASCADE,

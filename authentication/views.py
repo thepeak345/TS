@@ -62,7 +62,7 @@ def login_view(request):
     if request.method == 'POST':
         if form.is_valid():
             cd = form.cleaned_data
-            user = authenticate(email=cd['email'], password=cd['password'])
+            user = authenticate(username=cd['email'], password=cd['password'])
             if user is not None and user.is_active:
                 login(request, user)
                 return redirect('home')
