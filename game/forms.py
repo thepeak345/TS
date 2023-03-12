@@ -13,3 +13,13 @@ class BoxTitle(forms.ModelForm):
     class Meta:
         model = Box
         fields = ( 'title', 'start_date', 'end_date')
+
+
+class CodeboxForm(forms.Form):
+    codebox = forms.IntegerField()
+
+    def __init__(self, *args, **kwargs):
+        super(CodeboxForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-control'
+            visible.field.widget.attrs['placeholder'] = visible.name
