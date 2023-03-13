@@ -45,18 +45,22 @@ def box_title(request):
     })
 
 
+@login_required
 def box_confirm(request):
     form = CodeboxForm(request.POST or None)
-    title = request.session.get('title')
-    box = Box.objects.get(title=title)
     if request.method == 'POST':
         if form.is_valid():
             cd = form.cleaned_data
-            if cd['start_date'] == box.start_date:
-                box.is_active = True
+            code = cd['codebox']
+            try:
+                box = Box.objects.get(code=code)
+                box.member = request.user
+                box.count += 1
                 box.save()
-                del request.session['title']
-            return redirect('home')
-    return render(request, template_name='game/codebox.html', context={
-        'form': form,
-    })
+            except Box.DoesNotExist:
+                form.message = 'Такой игры нет'
+    context = {
+        'form' : form,
+    }
+
+    return render(request, template_name='game/codebox.html', context=context)
