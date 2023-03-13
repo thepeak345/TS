@@ -50,7 +50,7 @@ def user_confirm(request):
                 user.is_active = True
                 user.save()
                 del request.session['email']
-            return redirect('home')
+            return redirect('layout')
     return render(request, template_name='authentication/otp.html', context={
         'form': form,
     })
@@ -65,7 +65,7 @@ def login_view(request):
             user = authenticate(username=cd['email'], password=cd['password'])
             if user is not None and user.is_active:
                 login(request, user)
-                return redirect('home')
+                return redirect('layout')
     return render(request, 'authentication/login.html', context={
         'form': form,
         'error': error

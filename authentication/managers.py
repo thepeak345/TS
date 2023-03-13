@@ -1,5 +1,6 @@
 from django.contrib.auth.models import BaseUserManager
 
+
 class MyUserManager(BaseUserManager):
     def _create_user(self, email, firstname, lastname, password, **extra_fields):
         if not email:

@@ -31,7 +31,7 @@ def create_box(request):
                     box.code = otp
                     print(otp)
                     box.save()
-
+                return redirect('layout')
     context = {
         'form': form,
         'message': message

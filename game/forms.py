@@ -9,10 +9,11 @@ class BoxForm(forms.ModelForm):
         model = Box
         fields = ('is_closed', 'size')
 
+
 class BoxTitle(forms.ModelForm):
     class Meta:
         model = Box
-        fields = ( 'title', 'start_date', 'end_date')
+        fields = ('title', 'start_date', 'end_date')
 
 
 class CodeboxForm(forms.Form):
