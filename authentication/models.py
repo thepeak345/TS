@@ -11,10 +11,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     preferences = models.TextField(null=True)
     otp = models.SmallIntegerField(null=True)
-
+    box = models.ForeignKey('game.Box', on_delete=models.SET_NULL, null=True)
+    box_owner = models.BooleanField(default=False, null=True)
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
-
+    REQUIRED_FIELDS = ['firstname', 'lastname']
     objects = MyUserManager()
 
     def __str__(self):

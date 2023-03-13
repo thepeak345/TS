@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
+from django.contrib import messages
 
 from .forms import BoxForm, CodeboxForm
 from .models import Box
@@ -21,16 +22,14 @@ def create_box(request):
         if request.method == 'POST':
             if form.is_valid():
                 cd = form.cleaned_data
-                box = Box.objects.create(
-                    size=cd['size'],
-                    member=request.user,
-                    is_owner=True
-                )
+                box = Box.objects.create(size=cd['size'])
                 if cd['is_closed']:
                     otp = generate_otp(10)
                     box.code = otp
                     print(otp)
                     box.save()
+                request.user.box_owner = True
+                request.user.save()
                 return redirect('layout')
     context = {
         'form': form,
@@ -47,20 +46,22 @@ def box_title(request):
 
 @login_required
 def box_confirm(request):
-    form = CodeboxForm(request.POST or None)
+    form = CodeboxForm(request.POST)
     if request.method == 'POST':
         if form.is_valid():
             cd = form.cleaned_data
             code = cd['codebox']
             try:
                 box = Box.objects.get(code=code)
-                box.member = request.user
+                request.user.box = box
+                request.user.save()
                 box.count += 1
                 box.save()
+                return redirect('layout')
             except Box.DoesNotExist:
-                form.message = 'Такой игры нет'
+                form = CodeboxForm()
+                messages.error(request, message='Такой игры не существует')
     context = {
-        'form' : form,
+        'form': form,
     }
-
     return render(request, template_name='game/codebox.html', context=context)

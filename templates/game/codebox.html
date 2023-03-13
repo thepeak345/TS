@@ -5,9 +5,14 @@
 <div class="features">
     <form method="post">
         {% for field in form %}
-                {{ field }}
-            {% endfor %}
-        <a href="{% url 'layout' %}"><button type="submit"></button></a>
+            {{ field }}
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+        {% endfor %}
+        <a href="{% url 'layout' %}">
+            <button type="submit"></button>
+        </a>
     </form>
 </div>
 {% endblock %}
