@@ -13,7 +13,7 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def create_box(request):
     try:
-        box = Box.objects.get(member=request.user)
+        box = Box.objects.get(pk=request.user.box)
         message = 'Вы уже являетесь игроком игры {}'.format(box.title)
         form = None
     except Box.DoesNotExist:
@@ -65,3 +65,11 @@ def box_confirm(request):
         'form': form,
     }
     return render(request, template_name='game/codebox.html', context=context)
+
+
+def get_all_games(request):
+    boxes = Box.objects.filter(is_closed=False)
+    context = {
+        'boxes': boxes
+    }
+    return render(request, template_name='game/open_boxes.html', context=context)
