@@ -1,13 +1,18 @@
-{% extends 'main/home.html' %}
+{% extends 'layout.html' %}
+{% load static %}
 
-{% block title %}Login{% endblock %}
 
 {% block content %}
+      <h2>Вход</h2>
+        <h3>Кто вы?</h3>
+        <form action=""  method="post" >
+            {% for field in form %}
+                {{ field }}
+            {% endfor %}
 
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
+             <a href="{% url 'layout' %}"><button type="submit">Войти</button></a>
 
-        <button><i></i>Login</button>
-    </form>
+        </form>
+  <a href="{% url 'password_reset' %}"><button type="submit">Изменить пароль</button></a>
+
 {% endblock %}

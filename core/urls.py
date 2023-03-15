@@ -20,4 +20,6 @@ from django.views.generic import TemplateView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('authentication.urls')),
+    path('main/', include('main.urls')),
+    path('game/', include('game.urls'))
 ]

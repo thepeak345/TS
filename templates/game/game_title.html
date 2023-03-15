@@ -1,0 +1,7 @@
+{% extends 'layout.html' %}
+{% block content %}
+<form action="" method="post">
+    {{ form.as_p }}
+    <a href="{% url '#' %}"><button type="submit"></button></a>
+</form>
+{% endblock %}
