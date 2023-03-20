@@ -8,7 +8,7 @@ from .models import Box
 class BoxForm(forms.ModelForm):
     class Meta:
         model = Box
-        fields = ('is_closed', 'size')
+        fields = ('title', 'is_closed', 'size')
 
 
 class BoxTitle(forms.ModelForm):

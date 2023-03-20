@@ -12,23 +12,28 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def create_box(request):
-    try:
-        box = Box.objects.get(member=request.user)
+    print(request.user.box)
+    if request.user.box is not None:
+        box = Box.objects.get(pk=request.user.box.pk)
         message = 'Вы уже являетесь игроком игры {}'.format(box.title)
         form = None
-    except Box.DoesNotExist:
+    else:
         message = None
         form = BoxForm(request.POST or None)
         if request.method == 'POST':
             if form.is_valid():
                 cd = form.cleaned_data
-                box = Box.objects.create(size=cd['size'])
+                box = Box.objects.create(
+                    size=cd['size'],
+                    title=cd['title']
+                )
                 if cd['is_closed']:
                     otp = generate_otp(10)
                     box.code = otp
                     print(otp)
                     box.save()
                 request.user.box_owner = True
+                request.user.box = box
                 request.user.save()
                 return redirect('layout')
     context = {
@@ -67,6 +72,18 @@ def box_confirm(request):
     return render(request, template_name='game/codebox.html', context=context)
 
 
-def opened(request):
+def get_all_games(request):
     boxes = Box.objects.filter(is_closed=False)
-    return render(request, template_name='game/opened.html', context={'boxes': boxes})
+    context = {
+        'boxes': boxes
+    }
+    return render(request, template_name='game/open_boxes.html', context=context)
+
+
+def close_box(request):
+    box = Box.objects.filter(is_closed=True)
+    context = {
+        'box': box
+    }
+    return render(request, template_name='game/close_box.html', context=context)
+# def exit(request):
