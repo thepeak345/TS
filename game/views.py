@@ -65,3 +65,8 @@ def box_confirm(request):
         'form': form,
     }
     return render(request, template_name='game/codebox.html', context=context)
+
+
+def opened(request):
+    boxes = Box.objects.filter(is_closed=False)
+    return render(request, template_name='game/opened.html', context={'boxes': boxes})
