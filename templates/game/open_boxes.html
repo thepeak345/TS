@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 {% block content %}
 {% for box in boxes %}
-    {{ box.title }}
-{% endfor %}
+    <a href="{% url 'open_boxes' %}"><button type="submit">{{ box.title }}</button></a>
 
+{% endfor %}
 {% endblock %}

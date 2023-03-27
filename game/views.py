@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib import messages
-
 from .forms import BoxForm, CodeboxForm
 from .models import Box
 from authentication.utils import generate_otp
@@ -12,7 +11,6 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def create_box(request):
-    print(request.user.box)
     if request.user.box is not None:
         box = Box.objects.get(pk=request.user.box.pk)
         message = 'Вы уже являетесь игроком игры {}'.format(box.title)
@@ -31,6 +29,7 @@ def create_box(request):
                     otp = generate_otp(10)
                     box.code = otp
                     print(otp)
+                    box.is_closed = True
                     box.save()
                 request.user.box_owner = True
                 request.user.box = box
@@ -81,9 +80,36 @@ def get_all_games(request):
 
 
 def close_box(request):
-    box = Box.objects.filter(is_closed=True)
+    boxes = Box.objects.filter(is_closed=True)
     context = {
-        'box': box
+        'boxes': boxes
     }
     return render(request, template_name='game/close_box.html', context=context)
-# def exit(request):
+
+
+@login_required
+def exit_box(request):
+    if request.user.box:
+        box = Box.objects.get(pk=request.user.box.pk)
+        request.user.box = None
+        box.count -= 1
+        if request.user.box_owner:
+            request.user.box_owner = False
+        request.user.save()
+        box.save()
+
+    return redirect('layout')
+
+
+@login_required
+def vxod_box(request):
+    if request.user.box:
+        box = Box.objects.get(pk=request.user.box.pk)
+        request.user.box = None
+        box.count += 1
+        if request.user.box_owner:
+            request.user.box_owner = False
+        request.user.save()
+        box.save()
+
+    return redirect('')

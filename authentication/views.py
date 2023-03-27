@@ -13,9 +13,6 @@ def signup(request):
     form = SignUpForm(request.POST or None)
     error = ''
     if request.method == 'POST':
-
-        print(form.as_p())
-
         if form.is_valid():
             cd = form.cleaned_data
             user = User.objects.create_user(
