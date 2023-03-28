@@ -121,7 +121,7 @@ sidebar {
 content {
     margin-left: 130px; /* Отступ слева */
     padding: 10px; /* Поля вокруг текста */
-    background: #fff; /* Цвет фона правой колонки */
+    background: #CD5C5C	; /* Цвет фона правой колонки */
    }
 
 footer {
@@ -140,9 +140,9 @@ footer {
 }
 aside {
     float: left;
-    background: #181818;
-    width: 22%;
+    background: #FF69B4	;
+    width: 30%;
     padding: 1%;
     height: 100vh;
-    color: #FFC0CB;
-    border-right: 5px solid #4d4d4d
+    color: #FF69B4	;
+    border-right: 5px solid #FF1493
