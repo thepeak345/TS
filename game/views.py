@@ -105,10 +105,13 @@ def exit_box(request):
 def vxod_box(request):
     if request.user.box:
         box = Box.objects.get(pk=request.user.box.pk)
-        request.user.box = None
+        request.user.box = not None
         box.count += 1
         if request.user.box_owner:
-            request.user.box_owner = False
+            request.user.box_owner = True
+        if request.box.is_closed:
+
+
         request.user.save()
         box.save()
 
