@@ -79,14 +79,6 @@ def get_all_games(request):
     return render(request, template_name='game/open_boxes.html', context=context)
 
 
-def close_box(request):
-    boxes = Box.objects.filter(is_closed=True)
-    context = {
-        'boxes': boxes
-    }
-    return render(request, template_name='game/close_box.html', context=context)
-
-
 @login_required
 def exit_box(request):
     if request.user.box:
@@ -102,14 +94,23 @@ def exit_box(request):
 
 
 @login_required
-def vxod_box(request):
-    if request.user.box:
-        box = Box.objects.get(pk=request.user.box.pk)
-        request.user.box = None
+def enter_box(request, pk):
+    if not request.user.box:
+        box = Box.objects.get(pk=pk)
+        request.user.box = box
         box.count += 1
-        if request.user.box_owner:
-            request.user.box_owner = False
         request.user.save()
         box.save()
 
-    return redirect('')
+    return redirect('layout')
+
+
+def box_info(request, pk):
+    box = Box.objects.get(pk=pk)
+    context = {
+        'count': box.count,
+        'title': box.title,
+        'size': box.size,
+        'pk': pk
+    }
+    return render(request, template_name='game/box_inf.html', context=context)
