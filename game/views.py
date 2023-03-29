@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib import messages
-
 from .forms import BoxForm, CodeboxForm
 from .models import Box
 from authentication.utils import generate_otp
@@ -12,23 +11,28 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def create_box(request):
-    try:
-        box = Box.objects.get(pk=request.user.box)
+    if request.user.box is not None:
+        box = Box.objects.get(pk=request.user.box.pk)
         message = 'Вы уже являетесь игроком игры {}'.format(box.title)
         form = None
-    except Box.DoesNotExist:
+    else:
         message = None
         form = BoxForm(request.POST or None)
         if request.method == 'POST':
             if form.is_valid():
                 cd = form.cleaned_data
-                box = Box.objects.create(size=cd['size'])
+                box = Box.objects.create(
+                    size=cd['size'],
+                    title=cd['title']
+                )
                 if cd['is_closed']:
                     otp = generate_otp(10)
                     box.code = otp
                     print(otp)
+                    box.is_closed = True
                     box.save()
                 request.user.box_owner = True
+                request.user.box = box
                 request.user.save()
                 return redirect('layout')
     context = {
@@ -73,3 +77,39 @@ def get_all_games(request):
         'boxes': boxes
     }
     return render(request, template_name='game/open_boxes.html', context=context)
+
+
+def close_box(request):
+    boxes = Box.objects.filter(is_closed=True)
+    context = {
+        'boxes': boxes
+    }
+    return render(request, template_name='game/close_box.html', context=context)
+
+
+@login_required
+def exit_box(request):
+    if request.user.box:
+        box = Box.objects.get(pk=request.user.box.pk)
+        request.user.box = None
+        box.count -= 1
+        if request.user.box_owner:
+            request.user.box_owner = False
+        request.user.save()
+        box.save()
+
+    return redirect('layout')
+
+
+@login_required
+def vxod_box(request):
+    if request.user.box:
+        box = Box.objects.get(pk=request.user.box.pk)
+        request.user.box = None
+        box.count += 1
+        if request.user.box_owner:
+            request.user.box_owner = False
+        request.user.save()
+        box.save()
+
+    return redirect('')

@@ -6,9 +6,9 @@
     <form method="post">
         {% for field in form %}
             {{ field }}
+        {% endfor %}
         {% for message in messages %}
             {{ message }}
-        {% endfor %}
         {% endfor %}
         <a href="{% url 'layout' %}">
             <button type="submit"></button>

@@ -9,20 +9,26 @@
         <title>{% block title %}{% endblock %}</title>
         <link rel="stylesheet" href="{% static 'css/stylesignup.css' %} ">
     </head>
-    <body>
     <div id="container">
         {% block content %}
-        <header><h1>Тайный Санта</h1></header>
+        <header>
+            <h1>Тайный Санта</h1>
+        </header>
         <aside>
             {% if request.user.is_authenticated %}
-            <p><a href="{% url 'logout' %}">Выход</a></p>
-            <p><a href="{% url 'check' %}">Создать игру</a></p>
+                <p><a href="{% url 'logout' %}">Выход</a></p>
+                <p><a href="{% url 'check' %}">Создать игру</a></p>
             {% else %}
-            <p><a href="{% url 'signup' %}">Регистрация</a></p>
-            <p><a href="{% url 'login' %}">Вход</a></p>
+                <p><a href="{% url 'signup' %}">Регистрация</a></p>
+                <p><a href="{% url 'login' %}">Вход</a></p>
             {% endif %}
         </aside>
+        <content>
+            {% if request.user.box %}
+                <h1>Вы учавствуете в игре: {{ request.user.box.title }}</h1>
+                <a href="{% url 'exit_box' %}"><button type="submit">Выйти из игры</button></a>
+            {% endif %}
+        </content>
         {% endblock %}
     </div>
-    </body>
 </html>
