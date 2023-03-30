@@ -25,12 +25,15 @@
                 <p><a href="{% url 'login' %}">Вход</a></p>
             {% endif %}
         </aside>
-        <content>
+        <centerw>
             {% if request.user.box %}
                 <h1>Вы учавствуете в игре: {{ request.user.box.title }}</h1>
                 <a href="{% url 'exit_box' %}"><button type="submit">Выйти из игры</button></a>
             {% endif %}
-        </content>
+        </centerw>
+        <footer>
+            @ts
+        </footer>
         {% endblock %}
     </div>
 </html>

@@ -125,9 +125,10 @@ content {
    }
 
 footer {
-    background: #8fa09b; /* Цвет фона подвала */
-    color: #fff; /* Цвет текста */
-    padding: 5px; /* Отступы вокруг текста */
+    background: #EE82EE	; /* Цвет фона подвала */
+    text-align: left;
+    color: rgb(139, 0, 0)	; /* Цвет текста */
+    padding: 3px; /* Отступы вокруг текста */
     clear: left; /* Отменяем действие float */
     }
 .huy {
@@ -146,3 +147,12 @@ aside {
     height: 100vh;
     color: #FF69B4	;
     border-right: 5px solid #FF1493
+}
+centerw {
+    float: right;
+    background: #FFB6C1		;
+    width: 70%;
+    padding: 1%;
+    height: 100vh;
+    color: #FFB6C1		;
+    }
