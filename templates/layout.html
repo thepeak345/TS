@@ -18,6 +18,8 @@
             {% if request.user.is_authenticated %}
                 <p><a href="{% url 'logout' %}">Выход</a></p>
                 <p><a href="{% url 'check' %}">Создать игру</a></p>
+                <p><a href="{% url 'open_boxes' %}">Открытые игры</a></p>
+                <p><a href="{% url 'open_boxes' %}">Ввести пароль для входа в игру</a></p>
             {% else %}
                 <p><a href="{% url 'signup' %}">Регистрация</a></p>
                 <p><a href="{% url 'login' %}">Вход</a></p>
