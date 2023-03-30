@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 {% block content %}
     {% for box in boxes %}
-        <a href="{% url 'box_info' pk=box.pk %}"><h2 type="submit">{{ box.title }}</h2></a>
+        <a href="{% url 'box_info' pk=box.pk %}"><h1 type="submit">{{ box.title }}</h1></a>
     {% endfor %}
 {% endblock %}

@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 {% block content %}
-{{ title }}
-{{ count }}/{{ size }}
+<h2>{{ title }}</h2>
+<h1>{{ count }}/{{ size }}</h1>
 
   <a href="{% url 'enter_box' pk=pk %}"><button type="submit">Вступить в игру</button></a>
 {% endblock %}
