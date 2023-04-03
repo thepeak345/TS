@@ -2,11 +2,12 @@
 
 {% block content %}
 {% if message %}
-    {{ message }}
+    <h1>{{ message }}</h1>
+    <a href="{% url 'layout' %}"><button type="submit">Назад</button></a>
 {% else %}
 <form action="" method="post">
-    {{ form.as_p }}
-    <button type="submit"></button>
+    <h1>{{ form.as_p }}</h1>
+    <button type="submit">Создать игру</button>
 </form>
 {% endif %}
 {% endblock %}
