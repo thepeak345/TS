@@ -49,7 +49,7 @@ def box_title(request):
 
 
 @login_required
-def box_confirm(request):
+def box_confirm(request):   #Поиск закрытых игр
     form = CodeboxForm(request.POST)
     if request.method == 'POST':
         if form.is_valid():
@@ -61,7 +61,7 @@ def box_confirm(request):
                 request.user.save()
                 box.count += 1
                 box.save()
-                return redirect('layout')
+                return redirect('box_info', pk=box.pk)
             except Box.DoesNotExist:
                 form = CodeboxForm()
                 messages.error(request, message='Такой игры не существует')
@@ -72,7 +72,7 @@ def box_confirm(request):
 
 
 def get_all_games(request):
-    boxes = Box.objects.filter(is_closed=False)
+    boxes = Box.objects.filter(is_closed=False, is_active=True)
     context = {
         'boxes': boxes
     }
@@ -114,3 +114,6 @@ def box_info(request, pk):
         'pk': pk
     }
     return render(request, template_name='game/box_inf.html', context=context)
+
+
+
