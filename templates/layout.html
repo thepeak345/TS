@@ -15,11 +15,14 @@
             <h1>Тайный Санта</h1>
         </header>
         <aside>
-            {% if request.user.is_authenticated %}
-                <p><a href="{% url 'logout' %}">Выход</a></p>
+            {% if request.user.is_authenticated and request.user.box %}
+                    <p><a href="{% url 'logout' %}">Выход</a></p>
+                    <p><a href="{% url 'open_boxes' %}">Открытые игры</a></p>
+            {% elif request.user.is_authenticated and not request.user.box %}
                 <p><a href="{% url 'check' %}">Создать игру</a></p>
                 <p><a href="{% url 'open_boxes' %}">Открытые игры</a></p>
-                <p><a href="{% url 'open_boxes' %}">Ввести пароль для входа в игру</a></p>
+                <p><a href="{% url 'codebox' %}">Поиск закрытых игр</a></p>
+                <p><a href="{% url 'logout' %}">Выход</a></p>
             {% else %}
                 <p><a href="{% url 'signup' %}">Регистрация</a></p>
                 <p><a href="{% url 'login' %}">Вход</a></p>
