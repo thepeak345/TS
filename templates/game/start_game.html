@@ -1,0 +1,7 @@
+{% extends 'layout.html' %}
+{% block content %}
+<h1>Игра <h2>{{ title }}</h2> началась</h1>
+<h1>Напишите свои предпочтения подарков</h1>
+{{ user.preferences }}
+            <a href="{% url 'layout' %}"><h1 type="submit">Отправить</h1></a>
+{% endblock %}

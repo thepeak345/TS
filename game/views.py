@@ -2,9 +2,9 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib import messages
 from .forms import BoxForm, CodeboxForm
-from .models import Box
 from authentication.utils import generate_otp
 from game.models import Box
+from authentication.models import CustomUser
 
 from django.contrib.auth.decorators import login_required
 
@@ -101,7 +101,9 @@ def enter_box(request, pk):
         box.count += 1
         request.user.save()
         box.save()
-
+        if box.count == box.size:
+            box.is_active = False
+            return redirect('start_game')
     return redirect('layout')
 
 
@@ -115,5 +117,11 @@ def box_info(request, pk):
     }
     return render(request, template_name='game/box_inf.html', context=context)
 
+# def end(request):
+#     boxes = CustomUser.objects.select_related('box').filter(box=request.user.box)
 
-
+def preferences_box(request):
+    preferences = CustomUser.preferences
+    return render(request, 'game/start_game.html', context={
+        'preferences': preferences,
+    })
