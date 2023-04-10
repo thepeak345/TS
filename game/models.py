@@ -17,3 +17,4 @@ class Box(models.Model):
             self.is_active = False
         super(Box, self).save()
 
+

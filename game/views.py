@@ -49,7 +49,7 @@ def box_title(request):
 
 
 @login_required
-def box_confirm(request):   #Поиск закрытых игр
+def box_confirm(request):  # Поиск закрытых игр
     form = CodeboxForm(request.POST)
     if request.method == 'POST':
         if form.is_valid():
@@ -117,11 +117,9 @@ def box_info(request, pk):
     }
     return render(request, template_name='game/box_inf.html', context=context)
 
-# def end(request):
-#     boxes = CustomUser.objects.select_related('box').filter(box=request.user.box)
 
 def preferences_box(request):
-    preferences = CustomUser.preferences
+    boxes = CustomUser.objects.select_related('box').filter(box=request.user.box)
     return render(request, 'game/start_game.html', context={
-        'preferences': preferences,
+        'boxes': boxes,
     })
