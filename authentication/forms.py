@@ -10,7 +10,7 @@ class SignUpForm(forms.Form):
     firstname = forms.CharField(max_length=255)
     lastname = forms.CharField(max_length=255)
     password = forms.CharField(widget=forms.PasswordInput)
-
+    preferences = forms.CharField(widget=forms.Textarea)
 
     def __init__(self, *args, **kwargs):
         super(SignUpForm, self).__init__(*args, **kwargs)
@@ -42,6 +42,7 @@ class OtpForm(forms.Form):
 
 class PasswordResetForm(forms.Form):
     new_password = forms.CharField(widget=forms.PasswordInput)
+
     class Meta:
         model = User
         fields = ('new_password',)
@@ -53,6 +54,5 @@ class PasswordResetForm(forms.Form):
             visible.field.widget.attrs['placeholder'] = visible.name
 
 
-class PreferencesForm(forms.Form):
-    preferences = forms.TextField
-
+class PreferencesResetForm(forms.Form):
+    preferences = forms.CharField(widget=forms.Textarea)

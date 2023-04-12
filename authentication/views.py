@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.contrib.auth import logout, authenticate, login
-from .forms import SignUpForm, LoginForm, OtpForm, PasswordResetForm
+from .forms import SignUpForm, LoginForm, OtpForm, PasswordResetForm, PreferencesResetForm
 from .utils import generate_otp
 from django.views import generic
 
@@ -15,11 +15,13 @@ def signup(request):
     if request.method == 'POST':
         if form.is_valid():
             cd = form.cleaned_data
+            print(cd)
             user = User.objects.create_user(
                 email=cd['email'],
                 firstname=cd['firstname'],
                 lastname=cd['lastname'],
-                password=cd['password']
+                password=cd['password'],
+                preferences=cd['preferences']
             )
             otp = generate_otp(5)
             user.otp = otp
@@ -84,3 +86,14 @@ class PasswordResetView(generic.FormView):
     model = User
     template_name = 'authentication/password_reset.html'
     form_class = PasswordResetForm
+
+
+def preferences_reset(request):
+    form = PreferencesResetForm(request.POST or None)
+    if request.method == 'POST':
+        if form.is_valid():
+            cd = form.cleaned_data
+            pass
+
+
+
