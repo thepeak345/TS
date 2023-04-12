@@ -93,7 +93,11 @@ def preferences_reset(request):
     if request.method == 'POST':
         if form.is_valid():
             cd = form.cleaned_data
-            pass
-
+            request.user.preferences = cd['preferences']
+            request.user.save()
+            return redirect('layout')
+    return render(request, 'authentication/preferences_reset.html', context={
+        'form' : form
+    })
 
 
