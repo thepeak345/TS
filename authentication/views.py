@@ -89,6 +89,7 @@ class PasswordResetView(generic.FormView):
 
 
 def preferences_reset(request):
+    print(request.user.preferences)
     form = PreferencesResetForm(request.POST or None)
     if request.method == 'POST':
         if form.is_valid():
