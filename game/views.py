@@ -76,6 +76,7 @@ def get_all_games(request):
     context = {
         'boxes': boxes
     }
+
     return render(request, template_name='game/open_boxes.html', context=context)
 
 
@@ -105,6 +106,7 @@ def enter_box(request, pk):
             box.is_active = False
             return redirect('start_game')
     return redirect('layout')
+
 
 
 def box_info(request, pk):

@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+
+{% block title %} {% endblock %}
+
+{% block content %}
+<div class="features">
+    <form method="post">
+        {% for field in form %}
+                {{ field }}
+            {% endfor %}
+    <button class="btn btn-success" type="submit">Изменить</button>
+    </form>
+</div>
+{% endblock %}

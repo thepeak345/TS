@@ -4,7 +4,7 @@
     <h1>Все прошло успешно</h1>
     <form method="post">
         {% csrf_token %}
-        <a href="{% url 'home' %}"><li><i class="fas fa-home"></i>Вернуться на главную</li></a>
+        <a href="{% url 'layout' %}"><li><i class="fas fa-home"></i>Вернуться на главную</li></a>
     </form>
 </div>
 {% endblock %}

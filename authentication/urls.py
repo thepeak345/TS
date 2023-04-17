@@ -14,4 +14,5 @@ urlpatterns = [
     path('otp/', user_confirm, name='otp'),
     path('password-reset/', views.PasswordResetView.as_view(), name='password_reset'),
     path('password-reset/done/', views.PasswordResetDoneView.as_view(), name='password_reset_done'),
+    path('preferences-reset/', views.preferences_reset, name='preferences_reset')
 ]
