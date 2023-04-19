@@ -4,6 +4,7 @@
 {% block title %} {% endblock %}
 
 {% block content %}
+<p><h1 align="center">Ваши текущие предпочтения: <h2> {{ request.user.preferences }}</h2></h1></p>
 <div class="features">
     <form method="post">
         {% for field in form %}

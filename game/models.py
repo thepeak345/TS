@@ -18,3 +18,9 @@ class Box(models.Model):
         super(Box, self).save()
 
 
+class PairUser(models.Model):
+    box = models.ForeignKey('game.Box', on_delete=models.SET_NULL, null=True)
+    'user + user = 2 * user'
+    pass
+
+
