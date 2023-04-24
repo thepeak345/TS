@@ -10,5 +10,5 @@ urlpatterns = [
     path('enter_box/<int:pk>/', enter_box, name='enter_box'),
     path('leave_box/', exit_box, name='exit_box'),
     path('start_game/', preferences_box, name='start_game'),
-    path('another_box/<int:pk>/', another_box, name='another_box'),  # todo change url
+    path('another_box/', another_box, name='another_box'),  # todo change url
 ]
