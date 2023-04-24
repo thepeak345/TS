@@ -110,20 +110,22 @@ def enter_box(request, pk):
         return redirect('another_box')
     return redirect('layout')
 
+
 @login_required
 def another_box(request):
     if request.user.box:
         pk = request.session.get('pk')
         new_box = Box.objects.get(pk=pk)
-        new_box.count += 1
-        request.user.box.count -= 1
-        request.user.box.save()
-        new_box.save()
-        del request.session['pk']
-        if new_box.count == new_box.size:
-            new_box.is_active = False
-            return redirect('start_game')
-    return redirect('layout')
+        if request.user.box != new_box:
+            new_box.count += 1
+            request.user.box.count -= 1
+            request.user.box.save()
+            new_box.save()
+            del request.session['pk']
+            if new_box.count == new_box.size:
+                new_box.is_active = False
+                return redirect('start_game')
+    return redirect('')
 
 
 def box_info(request, pk):
