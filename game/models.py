@@ -3,13 +3,13 @@ from .validators import validate_box_size
 
 
 class Box(models.Model):
-    title = models.CharField(max_length=255)
-    is_closed = models.BooleanField(default=False)
+    title = models.CharField('Название', max_length=255)
+    is_closed = models.BooleanField('Закрыта', default=False)
     start_date = models.DateField(null=True)
     end_date = models.DateField(null=True)
     code = models.PositiveSmallIntegerField(null=True)
     count = models.PositiveSmallIntegerField(default=1)
-    size = models.PositiveSmallIntegerField(validators=[validate_box_size])
+    size = models.PositiveSmallIntegerField('Количество игроков', validators=[validate_box_size])
     is_active = models.BooleanField(default=True)
 
     def save(self, **kwargs):
