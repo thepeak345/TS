@@ -2,8 +2,10 @@
 {% block content %}
 <h2>{{ title }}</h2>
 <h1>{{ count }}/{{ size }}</h1>
-
-<a href="{% url 'enter_box' pk=pk %}"><button type="submit">Вступить в игру</button></a>
-<a href="{% url 'preferences_reset'%}"><button type="submit">Изменить предпочтения</button></a>
-
+{% if not request.user.box %}
+    <a href="{% url 'enter_box' pk=pk %}"><button type="submit">Вступить в игру</button></a>
+    <a href="{% url 'preferences_reset'%}"><button type="submit">Изменить предпочтения</button></a>
+{% else %}
+    <a href="{% url 'another_box' %}"><button type="submit">Вступить в игру</button></a>
+{% endif %}
 {% endblock %}

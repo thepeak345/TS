@@ -12,15 +12,8 @@ class Box(models.Model):
     size = models.PositiveSmallIntegerField('Количество игроков', validators=[validate_box_size])
     is_active = models.BooleanField(default=True)
 
-    def save(self, **kwargs):
-        if self.count == self.size:
-            self.is_active = False
-        super(Box, self).save()
-
 
 class PairUser(models.Model):
     box = models.ForeignKey('game.Box', on_delete=models.SET_NULL, null=True)
     'user + user = 2 * user'
     pass
-
-

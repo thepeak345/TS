@@ -121,11 +121,15 @@ def another_box(request):
             request.user.box.count -= 1
             request.user.box.save()
             new_box.save()
+            request.user.box = new_box
+            request.user.save()
             del request.session['pk']
             if new_box.count == new_box.size:
                 new_box.is_active = False
                 return redirect('start_game')
-    return redirect('')
+    return render(request, template_name='game/another_box.html', context={
+        'title': new_box.title,
+    })
 
 
 def box_info(request, pk):
