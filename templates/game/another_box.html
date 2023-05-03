@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 
-{% block content %} #посмотреть
+{% block content %}
 <h1>Вы учавствуете в игре: {{ request.user.box.title }} </h1>
 <h1>Вы уверены что хотите сменить игру?</h1>
 <a href="{% url 'another_box'%}"><button type="submit">Вступить</button></a>
