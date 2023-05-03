@@ -13,7 +13,4 @@ class Box(models.Model):
     is_active = models.BooleanField(default=True)
 
 
-class PairUser(models.Model):
-    box = models.ForeignKey('game.Box', on_delete=models.SET_NULL, null=True)
-    'user + user = 2 * user'
-    pass
+

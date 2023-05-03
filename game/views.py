@@ -96,6 +96,7 @@ def exit_box(request):
 
 @login_required
 def enter_box(request, pk):
+    print(pk)
     if not request.user.box:
         box = Box.objects.get(pk=pk)
         request.user.box = box
@@ -115,6 +116,7 @@ def enter_box(request, pk):
 def another_box(request):
     if request.user.box:
         pk = request.session.get('pk')
+        print(pk)
         new_box = Box.objects.get(pk=pk)
         if request.user.box != new_box:
             new_box.count += 1
@@ -127,8 +129,8 @@ def another_box(request):
             if new_box.count == new_box.size:
                 new_box.is_active = False
                 return redirect('start_game')
-    return render(request, template_name='game/another_box.html', context={
-        'title': new_box.title,
+    return render(request, template_name='layout.html', context={
+        'title': Box.title,
     })
 
 
@@ -138,8 +140,13 @@ def box_info(request, pk):
         'count': box.count,
         'title': box.title,
         'size': box.size,
-        'pk': pk
+        'pk' : pk
     }
+    if request.session.get('pk') is None:
+        request.session['pk'] = pk
+    else:
+        del request.session['pk']
+        request.session['pk'] = pk
     return render(request, template_name='game/box_inf.html', context=context)
 
 
