@@ -13,4 +13,7 @@ class Box(models.Model):
     is_active = models.BooleanField(default=True)
 
 
-
+class Pair(models.Model):
+    player1 = models.ForeignKey('authentication.CustomUser', on_delete=models.CASCADE, related_name='player1')
+    player2 = models.ForeignKey('authentication.CustomUser', on_delete=models.CASCADE, related_name='player2')
+    box = models.ForeignKey('game.Box', on_delete=models.CASCADE)
