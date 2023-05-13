@@ -19,7 +19,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
-
-
 class PasswordReset(models.Model):
     new_password = models.CharField(max_length=255)
+
+

@@ -1,3 +1,5 @@
+import random
+
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib import messages
@@ -140,7 +142,7 @@ def box_info(request, pk):
         'count': box.count,
         'title': box.title,
         'size': box.size,
-        'pk' : pk
+        'pk': pk
     }
     if request.session.get('pk') is None:
         request.session['pk'] = pk
@@ -155,3 +157,5 @@ def preferences_box(request):
     return render(request, 'game/start_game.html', context={
         'boxes': boxes,
     })
+
+
