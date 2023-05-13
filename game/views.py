@@ -7,7 +7,7 @@ from .forms import BoxForm, CodeboxForm
 from authentication.utils import generate_otp
 from game.models import Box
 from authentication.models import CustomUser
-
+from .utils import box_pair
 from django.contrib.auth.decorators import login_required
 
 
@@ -98,14 +98,14 @@ def exit_box(request):
 
 @login_required
 def enter_box(request, pk):
-    print(pk)
-    if not request.user.box:
+    if not request.user.box or not request.user.box.is_active:
         box = Box.objects.get(pk=pk)
         request.user.box = box
         box.count += 1
         request.user.save()
         box.save()
         if box.count == box.size:
+            box_pair(box)
             box.is_active = False
             return redirect('start_game')
     else:
@@ -116,9 +116,8 @@ def enter_box(request, pk):
 
 @login_required
 def another_box(request):
-    if request.user.box:
+    if request.user.box and request.user.box.is_active:
         pk = request.session.get('pk')
-        print(pk)
         new_box = Box.objects.get(pk=pk)
         if request.user.box != new_box:
             new_box.count += 1
@@ -129,6 +128,8 @@ def another_box(request):
             request.user.save()
             del request.session['pk']
             if new_box.count == new_box.size:
+                box_pair(new_box)
+
                 new_box.is_active = False
                 return redirect('start_game')
     return render(request, template_name='layout.html', context={
@@ -157,5 +158,3 @@ def preferences_box(request):
     return render(request, 'game/start_game.html', context={
         'boxes': boxes,
     })
-
-
