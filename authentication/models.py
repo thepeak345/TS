@@ -12,6 +12,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     preferences = models.TextField(null=True)
     otp = models.SmallIntegerField(null=True)
     box = models.ForeignKey('game.Box', on_delete=models.SET_NULL, null=True)
+    pair = models.ForeignKey('game.Pair', on_delete=models.SET_NULL, null=True)
     box_owner = models.BooleanField(default=False, null=True)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['firstname', 'lastname']
