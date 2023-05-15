@@ -38,6 +38,7 @@
                 <h1>У вас нет сейчас активных игр</h1>
             {% elif not request.user.box.is_active %}
                 <h1>Игра {{ request.user.box.title }} началась</h1>
+                <h1>Ваша пара: {{ request.user.}}</h1>
             {% endif %}
         </centerw>
         <footer>
