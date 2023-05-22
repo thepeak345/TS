@@ -107,6 +107,7 @@ def enter_box(request, pk):
         if box.count == box.size:
             box_pair(box)
             box.is_active = False
+            box.save()
             return redirect('start_game')
     else:
         request.session['pk'] = pk
