@@ -116,7 +116,7 @@ header {
     font-size: 2.2em; /* Размер текста */
     text-align: center; /* Выравнивание по центру */
     padding: 10px; /* Отступы вокруг текста */
-    background: #FF69B4; /* Цвет фона шапки */
+    background: #f08080; /* Цвет фона шапки */
     color: #ffe; /* Цвет текста */
 }
 
@@ -137,7 +137,7 @@ content {
    }
 
 footer {
-    background: #EE82EE	; /* Цвет фона подвала */
+    background: #E4717A	; /* Цвет фона подвала */
     text-align: left;
     color: rgb(139, 0, 0)	; /* Цвет текста */
     padding: 3px; /* Отступы вокруг текста */
@@ -153,21 +153,21 @@ footer {
 }
 aside {
     float: left;
-    background: #FF69B4	;
+    background: #f08080	;
     width: 30%;
     padding: 1%;
     height: 100vh;
-    color: #FF69B4	;
-    border-right: 5px solid #FF1493
+    color: #f08080	;
+    border-right: 5px solid #E4717A
 }
 centerw {
     float: right;
-    background: #FFB6C1		;
+    background: #FADADD		;
     width: 70%;
     padding: 1%;
     height: 100vh;
-    color: #FFB6C1		;
+    color: #FADADD	;
     }
-k {
-    margin-left: 130px;
+a {
+    color: #C80000
  }
